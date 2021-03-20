@@ -10,7 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{rest}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamHttpMethod": [ "Post" ]
     }
   ],
   "GlobalConfiguration": {

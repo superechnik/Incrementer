@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lib;
 
 namespace Api.Controllers
 {
@@ -12,10 +13,10 @@ namespace Api.Controllers
     public class IncrementController : ControllerBase
     {
 
-        [HttpGet]
-        public string Get()
+        [HttpPost]
+        public async Task<IActionResult> Post([FromBody] Lib.KeyValuePair kvp)
         {
-            return "hello increment";
+            return Ok();
         }
 
 
