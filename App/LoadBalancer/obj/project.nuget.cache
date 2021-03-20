@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "e+JypubealS3un4Q199QtDmT0qtkGyNgwqaGI9gjSrKfE+xh8J9paigYHQoRDUZlnLcgSJ/ibWjOw1qsi2/TzQ==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\Matthew\\Source\\Repos\\Incrementer\\App\\LoadBalancer\\LoadBalancer.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\Matthew\\.nuget\\packages\\microsoft.visualstudio.azure.containers.tools.targets\\1.10.13\\microsoft.visualstudio.azure.containers.tools.targets.1.10.13.nupkg.sha512"
+  ],
+  "logs": []
+}
