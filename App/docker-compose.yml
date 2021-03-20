@@ -11,6 +11,9 @@ services:
       dockerfile: LoadBalancer/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:3333
+    links:
+      - api 
+ 
 
   api:
     container_name: api
