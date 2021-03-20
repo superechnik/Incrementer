@@ -7,7 +7,11 @@ namespace Incrementer.Services
 {
     public interface IRepo
     {
-         public Task Upsert(Lib.KeyValuePair kvp);
+        public Task Upsert(Lib.KeyValuePair kvp);
+
+        public Task<Models.KeyValue> Get(string key);
+
+        
 
     }
 }

@@ -11,6 +11,18 @@
       ],
       "UpstreamPathTemplate": "/api/{rest}",
       "UpstreamHttpMethod": [ "Post" ]
+    },
+    {
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
+      "DownstreamHostAndPorts": [
+        {
+          "Host": "incrementer",
+          "Port": 3100
+        }
+      ],
+      "UpstreamPathTemplate": "/api/{rest}",
+      "UpstreamHttpMethod": [ "Get" ]
     }
   ],
   "GlobalConfiguration": {

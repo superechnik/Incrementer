@@ -1,4 +1,5 @@
 ﻿using Incrementer.Context;
+using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -14,13 +15,16 @@ namespace Incrementer.Services
             _ctx = ctx;
         }
 
+        public async Task<Models.KeyValue> Get(string key) =>
+            await _ctx.KeyValues
+                .Where(x => x.Key == key)
+                .FirstOrDefaultAsync();                
+
         public async Task Upsert(Lib.KeyValuePair data)
         {
 
             //get current val 
-            var val = _ctx.KeyValues
-                .Where(x => x.Key == data.Key)
-                .FirstOrDefault();
+            var val = await Get(data.Key);
 
             if (val != null)
             {
@@ -38,7 +42,7 @@ namespace Incrementer.Services
                     Value = data.Value
                 };
 
-                _ctx.Add(row);
+                await _ctx.AddAsync(row);
             }
 
             await _ctx.SaveChangesAsync();
