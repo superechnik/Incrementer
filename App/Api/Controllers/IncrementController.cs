@@ -24,7 +24,7 @@ namespace Api.Controllers
         [HttpPost]
         public async Task<IActionResult> Post([FromBody] Lib.KeyValuePair kvp)
         {
-            var endPoint = await _bus.GetSendEndpoint(new Uri("queue:input-queue"));
+            var endPoint = await _bus.GetSendEndpoint(new Uri("queue:kvpQueue"));
             await endPoint.Send(kvp); 
             return Ok();
 
