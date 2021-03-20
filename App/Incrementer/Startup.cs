@@ -1,4 +1,5 @@
 using Incrementer.Context;
+using MassTransit;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -13,6 +14,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Lib;
+using GreenPipes;
 
 namespace Incrementer
 {
@@ -38,6 +41,29 @@ namespace Incrementer
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IncrementContext>(ops =>
                     ops.UseNpgsql("User ID = postgres; Password = test; Server = postgres; Port = 5432; Database = increment_db; Integrated Security = true; Pooling = true;"));
+
+
+            services.AddMassTransit(x =>
+            {
+                x.AddConsumer<KvpConsumer>();
+                x.AddBus(provider => Bus.Factory.CreateUsingRabbitMq(cfg =>
+                {
+                    cfg.UseHealthCheck(provider);
+                    cfg.Host("rabbit", h =>
+                    {
+                        h.Username("guest");
+                        h.Password("guest");
+                    });
+                    cfg.ReceiveEndpoint("kvpQueue", e =>
+                    {
+                        e.PrefetchCount = 16;
+                        e.UseMessageRetry(r => r.Immediate(5));
+                        e.ConfigureConsumer<KvpConsumer>(provider);
+                    });
+                }));
+            });
+
+            services.AddMassTransitHostedService();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
