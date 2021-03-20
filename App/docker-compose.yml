@@ -27,12 +27,30 @@ services:
     depends_on:
       - rabbit
 
+  incrementer:
+    container_name: incrementer
+    image: mcr.microsoft.com/dotnet/sdk:5.0
+    ports:
+      - '3100:3100'
+    restart: on-failure
+    build:
+      context: .
+      dockerfile: Incrementer/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:3100
+    depends_on:
+      - rabbit
+      - postgres
+
   postgres:
+    container_name: postgres
     image: 'postgres:latest'
     ports:
       - '5432:5432'
     environment:
-      POSTGRES_PASSWORD: test
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test
+      - POSTGRES_DB=increment_db
     volumes:
       - ./pgdata:/var/lib/postgresql/data
   rabbit:
