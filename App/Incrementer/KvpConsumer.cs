@@ -1,40 +1,20 @@
 ﻿using MassTransit;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
-using Lib;
-using Incrementer.Context;
+using Incrementer.Services;
 
 namespace Incrementer
 {
     public class KvpConsumer : IConsumer<Lib.KeyValuePair>
     {
-        private readonly IncrementContext _ctx;
-        public KvpConsumer (IncrementContext ctx)
-        {
-            _ctx = ctx;
+        private readonly IRepo _repo;
 
+        public KvpConsumer (IRepo repo)
+        {
+            _repo = repo;
         }
 
-        public async Task Consume(ConsumeContext<Lib.KeyValuePair> ctx)
-        {
-            var message = ctx.Message;
-
-            var data = new Models.KeyValue()
-            {
-                Key = message.Key,
-                Value = message.Value
-            };
-
-            await Task.Run(() =>
-            {
-                _ctx.KeyValues.Add(data);
-                _ctx.SaveChanges();
-
-            });
-
-        }
+        public async Task Consume(ConsumeContext<Lib.KeyValuePair> ctx) =>
+            await _repo.Upsert(ctx.Message);
 
 
     }
