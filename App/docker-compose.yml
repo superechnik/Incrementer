@@ -1,0 +1,42 @@
+version: '3.4'
+
+services:
+  loadbalancer:
+    image: mcr.microsoft.com/dotnet/sdk:5.0
+    ports:
+      - '3333:3333'
+    build:
+      context: .
+      dockerfile: LoadBalancer/Dockerfile
+    environment:
+      - ASPNETCORE_URLS=http://+:3333
+
+  postgres:
+    image: 'postgres:latest'
+    ports:
+      - '5432:5432'
+    environment:
+      POSTGRES_PASSWORD: test
+    volumes:
+      - ./pgdata:/var/lib/postgresql/data
+  rabbit:
+    image: 'rabbitmq:3.8-management-alpine'
+    ports:
+      # The standard AMQP protocol port
+      - '5672:5672'
+      # HTTP management UI
+      - '15672:15672'
+    environment:
+      # The location of the RabbitMQ server.  "amqp" is the protocol;
+      # "rabbitmq" is the hostname.  Note that there is not a guarantee
+      # that the server will start first!  Telling the pika client library
+      # to try multiple times gets around this ordering issue.
+      AMQP_URL: 'amqp://rabbitmq?connection_attempts=5&retry_delay=5'
+      RABBITMQ_DEFAULT_USER: "guest"
+      RABBITMQ_DEFAULT_PASS: "guest"
+    networks:
+      - network
+networks:
+  # Declare our private network.  We must declare one for the magic
+  # Docker DNS to work, but otherwise its default settings are fine.
+  network: {}

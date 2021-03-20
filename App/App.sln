@@ -3,15 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31112.23
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer", "LoadBalancer\LoadBalancer.csproj", "{1B1E93A3-4DD8-458A-BE97-C405D9572434}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadBalancer", "LoadBalancer\LoadBalancer.csproj", "{1B1E93A3-4DD8-458A-BE97-C405D9572434}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Api", "Api\Api.csproj", "{0C0EDA29-11D9-452A-A131-02DE35B9F203}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Api", "Api\Api.csproj", "{0C0EDA29-11D9-452A-A131-02DE35B9F203}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Incrementer", "Incrementer\Incrementer.csproj", "{8D4DBFCE-6968-42AF-986C-52D7A6105A24}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Incrementer", "Incrementer\Incrementer.csproj", "{8D4DBFCE-6968-42AF-986C-52D7A6105A24}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Lib", "Lib\Lib.csproj", "{2ABC7FC8-613B-4E28-83C2-E374383B4770}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "Lib\Lib.csproj", "{2ABC7FC8-613B-4E28-83C2-E374383B4770}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tests", "Tests\Tests.csproj", "{4A7EC36C-34E7-43B3-B60E-99A856B58B0B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "Tests\Tests.csproj", "{4A7EC36C-34E7-43B3-B60E-99A856B58B0B}"
+EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4222B1B9-EAF6-4E66-A5A6-A2CB627C33E6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -39,6 +41,10 @@ Global
 		{4A7EC36C-34E7-43B3-B60E-99A856B58B0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4A7EC36C-34E7-43B3-B60E-99A856B58B0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4A7EC36C-34E7-43B3-B60E-99A856B58B0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4222B1B9-EAF6-4E66-A5A6-A2CB627C33E6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4222B1B9-EAF6-4E66-A5A6-A2CB627C33E6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4222B1B9-EAF6-4E66-A5A6-A2CB627C33E6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4222B1B9-EAF6-4E66-A5A6-A2CB627C33E6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
