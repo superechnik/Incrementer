@@ -1,16 +1,16 @@
 {
   "Routes": [
     {
-      "DownstreamPathTemplate": "/api/{rest}",
-      "DownstreamScheme": "https",
+      "DownstreamPathTemplate": "/{rest}",
+      "DownstreamScheme": "http",
       "DownstreamHostAndPorts": [
         {
           "Host": "api",
-          "Port": 443
+          "Port": 3000
         }
       ],
-      "UpstreamPathTemplate": "/todos/{id}",
-      "UpstreamHttpMethod": [ "Get" ]
+      "UpstreamPathTemplate": "/api/{rest}",
+      "UpstreamHttpMethod": [ "Post" ]
     }
   ],
   "GlobalConfiguration": {
