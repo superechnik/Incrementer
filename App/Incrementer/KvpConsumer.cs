@@ -13,6 +13,11 @@ namespace Incrementer
             _repo = repo;
         }
 
+        /// <summary>
+        /// dequeues the value from rabbitMq and upserts into the db
+        /// </summary>
+        /// <param name="ctx"></param>
+        /// <returns></returns>
         public async Task Consume(ConsumeContext<Lib.KeyValuePair> ctx) =>
             await _repo.Upsert(ctx.Message);
 
