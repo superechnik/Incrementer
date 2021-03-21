@@ -1,7 +1,7 @@
 ﻿using Incrementer.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
-using System.Text.Json;
+using Microsoft.AspNetCore.Http;
 
 namespace Incrementer.Controllers
 {
@@ -10,24 +10,44 @@ namespace Incrementer.Controllers
     public class IncrementController : ControllerBase
     {
         private readonly IRepo _repo;
+    
         public IncrementController(IRepo repo)
         {
             _repo = repo;
+
         }
 
+        /// <summary>
+        /// Get the current value from the db.
+        /// If being called from another controller protect against null
+        /// </summary>
+        /// <param name="key"></param>
+        /// <returns></returns>
         [HttpGet("{key}")]
-        public async Task<Models.KeyValue> Get(string key)
+        public async Task<IActionResult> Get(string key)
         {
-            try
+            if (key==null)
             {
-
-                return await _repo.Get(key);
-
+                return BadRequest("you must pass a value");
             }
-            catch (System.Exception)
+            else
             {
+                try
+                {
+                    var record = new Lib.KeyValuePair(key, 0);
 
-                throw;
+                    var data = await _repo.Get(record);
+
+
+                    return Ok(data);
+
+                }
+                catch (System.Exception ex)
+                {
+
+                    return StatusCode(StatusCodes.Status500InternalServerError, ex);
+                }
+
             }
 
         }

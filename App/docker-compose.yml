@@ -48,11 +48,12 @@ services:
     ports:
       - '5432:5432'
     environment:
-      - POSTGRES_USER=postgres
+      - POSTGRES_USER=postgre
       - POSTGRES_PASSWORD=test
       - POSTGRES_DB=increment_db
     volumes:
       - ./pgdata:/var/lib/postgresql/data
+  
   rabbit:
     container_name: rabbit
     image: 'rabbitmq:3.8-management-alpine'
