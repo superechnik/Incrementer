@@ -11,6 +11,8 @@ services:
       dockerfile: LoadBalancer/Dockerfile
     environment:
       - ASPNETCORE_URLS=http://+:3333
+    depends_on:
+      - rabbit
  
 
   api:
@@ -71,6 +73,3 @@ services:
       interval: 5s
       timeout: 15s
       retries: 1
-
-networks:
-  network: {}
