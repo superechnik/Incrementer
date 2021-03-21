@@ -25,7 +25,6 @@ namespace Incrementer
         public void ConfigureServices(IServiceCollection services)
         {
 
-
             services.AddScoped<IRepo, Repo>();
 
             services.AddControllers();
@@ -34,9 +33,11 @@ namespace Incrementer
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "Incrementer", Version = "v1" });
             });
 
+            string pgConnString = Configuration.GetSection("ConnectionStrings")["Postgres"];
+
             services.AddEntityFrameworkNpgsql()
                 .AddDbContext<IncrementContext>(ops =>
-                    ops.UseNpgsql("User ID = postgres; Password = test; Server = postgres; Port = 5432; Database = increment_db; Integrated Security = true; Pooling = true;"));
+                    ops.UseNpgsql(pgConnString));
 
 
             services.AddMassTransit(x =>

@@ -13,7 +13,6 @@ services:
       - ASPNETCORE_URLS=http://+:3333
     depends_on:
       - rabbit
- 
 
   api:
     container_name: api

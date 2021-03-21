@@ -29,7 +29,7 @@ namespace LoadBalancer
             {
                 endpoints.MapGet("/", async context =>
                 {
-                    await context.Response.WriteAsync("Hello World!");
+                    await context.Response.WriteAsync("Incrementer load balancer is running");
                 });
             });
 
