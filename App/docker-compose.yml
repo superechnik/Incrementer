@@ -3,7 +3,7 @@ version: '3.4'
 services:
   loadbalancer:
     container_name: loadbalancer
-    image: ${DOCKER_REGISTRY-}loadbalancer
+    image: incrementer.azurecr.io/${DOCKER_REGISTRY-}loadbalancer
     ports:
       - '3333:3333'
     build:
