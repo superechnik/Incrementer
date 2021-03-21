@@ -10,14 +10,7 @@
         }
       ],
       "UpstreamPathTemplate": "/api/{rest}",
-      "UpstreamHttpMethod": [ "Post" ],
-      "RateLimitOptions": {
-        "ClientWhitelist": [], //no client is immune
-        "EnableRateLimiting": true,
-        "Period": "1ms",
-        "PeriodTimespan": 1, //retry after 1 ms
-        "Limit": 1 //only allow 1 per ms
-      }
+      "UpstreamHttpMethod": [ "Post" ]
     },
     {
       "DownstreamPathTemplate": "/{rest}",

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace Incrementer.Services
 {
@@ -9,9 +6,7 @@ namespace Incrementer.Services
     {
         public Task Upsert(Lib.KeyValuePair kvp);
 
-        public Task<Models.KeyValue> Get(string key);
-
-        
+        public Task<Models.KeyValue> Get(Lib.KeyValuePair kvp);
 
     }
 }

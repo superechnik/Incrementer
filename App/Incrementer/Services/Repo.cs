@@ -15,22 +15,34 @@ namespace Incrementer.Services
             _ctx = ctx;
         }
 
-        public async Task<Models.KeyValue> Get(string key) =>
-            await _ctx.KeyValues
-                .Where(x => x.Key == key)
-                .FirstOrDefaultAsync();                
+        private async Task<Models.KeyValue> GetValue (Lib.KeyValuePair rec)
+        {
+            var data = await _ctx.KeyValues
+                .Where(x => x.Key == rec.Key)
+                .FirstOrDefaultAsync();
+
+            return data;
+        }
+
+        public async Task<Models.KeyValue> Get (Lib.KeyValuePair data)
+        {
+            //get current value
+            var val = await GetValue(data);
+
+            return val;
+
+        }
 
         public async Task Upsert(Lib.KeyValuePair data)
         {
 
             //get current val 
-            var val = await Get(data.Key);
+            var val = await GetValue(data);
 
             if (val != null)
             {
                 //update 
                 val.Value += data.Value;
-
 
             }
             else
