@@ -51,8 +51,4 @@ Once you have that, to run the tests do the following:
 `cd ../LoadBalancer.Tests`
 `dotnet test -v normal`
 
-![image](https://user-images.githubusercontent.com/10968503/111925162-12272600-8a7e-11eb-8f97-e24a535f6a49.png)
-
-
-
-
+![image](https://user-images.githubusercontent.com/10968503/111927377-dfcdf680-8a86-11eb-9f75-7b8abc36213b.png)
