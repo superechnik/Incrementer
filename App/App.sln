@@ -13,12 +13,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Lib", "Lib\Lib.csproj", "{2
 EndProject
 Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{4222B1B9-EAF6-4E66-A5A6-A2CB627C33E6}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D3988AF2-22C2-4AB5-831A-445A805AD1C9}"
-	ProjectSection(SolutionItems) = preProject
-		db.env = db.env
-	EndProjectSection
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LoadBalancer.Tests", "..\LoadBalancer.Tests\LoadBalancer.Tests.csproj", "{32B30702-A5F3-42F0-B78F-F510EE1421F9}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LoadBalancer.Tests", "..\LoadBalancer.Tests\LoadBalancer.Tests.csproj", "{32B30702-A5F3-42F0-B78F-F510EE1421F9}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

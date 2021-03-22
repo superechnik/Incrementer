@@ -11,7 +11,6 @@ namespace Incrementer.Services
         
         public Repo(IncrementContext ctx)
         {
-
             _ctx = ctx;
         }
 
@@ -35,7 +34,6 @@ namespace Incrementer.Services
 
         public async Task Upsert(Lib.KeyValuePair data)
         {
-
             //get current val 
             var val = await GetValue(data);
 
@@ -58,7 +56,6 @@ namespace Incrementer.Services
             }
 
             await _ctx.SaveChangesAsync();
-
 
         }
 

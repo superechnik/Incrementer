@@ -8,10 +8,8 @@ using Sc = System.Net.HttpStatusCode;
 
 namespace LoadBalancer.Tests
 {
-
     public class IntegrationTests
     {
-
         private readonly HttpClient _client;
 
         public IntegrationTests()
@@ -55,8 +53,10 @@ namespace LoadBalancer.Tests
 
             var oldData = await DeserializeToKvp(oldResponse);
 
+            var amountToAdd = 20;
+
             //post increment 10
-            _ = await Post(new Lib.KeyValuePair("foo", 20));
+            _ = await Post(new Lib.KeyValuePair("foo", amountToAdd));
 
             //wait 10 seconds
             await Task.Delay(10000);
@@ -65,7 +65,7 @@ namespace LoadBalancer.Tests
 
             var newData = await DeserializeToKvp(newResponse);
 
-            var shouldBe = oldData.Value + 20;
+            var shouldBe = oldData.Value + amountToAdd;
 
             Assert.Equal(newData.Value, shouldBe);
         }
@@ -89,7 +89,6 @@ namespace LoadBalancer.Tests
 
                 await Task.Delay(1000);
 
-
             }
 
             //get new value
@@ -99,11 +98,8 @@ namespace LoadBalancer.Tests
 
             var shouldBe = oldData.Value + acc;
 
-
             Assert.Equal(newData.Value, shouldBe);
         }
-
-
 
         [Fact]
         public async Task RateLimiterLimitsPostsToOnePerSecond()
@@ -132,6 +128,39 @@ namespace LoadBalancer.Tests
             await Task.Delay(1000);
         }
 
+        [Fact]
+        public async Task KeyAndValueAreRequired()
+        {
+            var bodyMissingKey = new StringContent(JsonSerializer.Serialize(new
+            {
+                Value = "Hello"
+            }), Encoding.UTF8, "application/json");
+
+            var bodyMissingValue = new StringContent(JsonSerializer.Serialize(new
+            {
+                Key = 3
+            }), Encoding.UTF8, "application/json");
+
+
+            var missingKey = await _client.PostAsync(Url, bodyMissingKey);
+			
+			await Task.Delay(1000);
+
+            var missingValue = await _client.PostAsync(Url, bodyMissingValue);
+			
+			await Task.Delay(1000);
+
+            var missingAll = await _client.PostAsync(Url,null);
+			
+			await Task.Delay(1000);
+
+            Assert.True(
+                !missingKey.IsSuccessStatusCode &&
+                !missingValue.IsSuccessStatusCode &&
+                !missingAll.IsSuccessStatusCode
+                );
+        }
+
 
         private async Task<HttpResponseMessage> Get(string key)
             => await _client.GetAsync(Path.Combine(Url, key));
@@ -145,7 +174,6 @@ namespace LoadBalancer.Tests
 
         private async Task<Lib.KeyValuePair> DeserializeToKvp(HttpResponseMessage msg) =>
             JsonSerializer.Deserialize<Lib.KeyValuePair>(await msg.Content.ReadAsStringAsync(), JsonOptions);
-
 
     }
             

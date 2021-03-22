@@ -10,7 +10,6 @@ namespace Incrementer.Controllers
     public class IncrementController : ControllerBase
     {
         private readonly IRepo _repo;
-    
         public IncrementController(IRepo repo)
         {
             _repo = repo;
@@ -38,7 +37,6 @@ namespace Incrementer.Controllers
 
                     var data = await _repo.Get(record);
 
-
                     return Ok(data);
 
                 }
@@ -51,7 +49,6 @@ namespace Incrementer.Controllers
             }
 
         }
-
 
     }
 }
