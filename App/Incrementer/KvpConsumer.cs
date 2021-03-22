@@ -21,6 +21,5 @@ namespace Incrementer
         public async Task Consume(ConsumeContext<Lib.KeyValuePair> ctx) =>
             await _repo.Upsert(ctx.Message);
 
-
     }
 }

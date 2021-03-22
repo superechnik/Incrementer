@@ -17,13 +17,13 @@ namespace Api.Controllers
             _bus = bus;
         }
 
-    /// <summary>
-    /// Accepts body of {Key:string, Value:decimal} and sends the 
-    /// body into the rabbitMq queue
-    /// </summary>
-    /// <param name="kvp"></param>
-    /// <returns></returns>
-    [HttpPost]
+        /// <summary>
+        /// Accepts body of {Key:string, Value:decimal} and sends the 
+        /// body into the rabbitMq queue
+        /// </summary>
+        /// <param name="kvp"></param>
+        /// <returns></returns>
+        [HttpPost]
         public async Task<IActionResult> Post([FromBody] Lib.KeyValuePair kvp)
         {
 
@@ -33,7 +33,7 @@ namespace Api.Controllers
             }
             else if (kvp.Value < 0)
             {
-                return BadRequest("Did you mean /Decrement ?");
+                return BadRequest("Did you mean /Decrement?");
             }
             else if (kvp.Value == 0)
             {
@@ -46,16 +46,14 @@ namespace Api.Controllers
             {
                 await endPoint.Send(kvp);
 
-                return Ok($"Value {kvp.Value} has been queued for key: {kvp.Key}");
+                return Ok($"Value: {kvp.Value} has been queued for key: {kvp.Key}");
             }
 
             catch (Exception ex)
             {
-
                 return StatusCode(StatusCodes.Status500InternalServerError, ex);
             }
         }
-
 
     }
 }
