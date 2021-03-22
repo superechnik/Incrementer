@@ -27,12 +27,11 @@ To use the app:
 Body:
 `
   {
-    "Key":string,
-    "Value":number
+    "key":string,
+    "value":number
 }
 `
-
-![image](https://user-images.githubusercontent.com/10968503/111924872-e48dad00-8a7c-11eb-8ffc-d45d7010a3f5.png)
+![image](https://user-images.githubusercontent.com/10968503/111928290-89ae8280-8a89-11eb-96cc-0bc4e99d509f.png)
 
 `GET: http://localhost:3333/api/Increment/{key}`
 
